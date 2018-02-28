@@ -1,0 +1,332 @@
+@GeneralOptions
+
+SystemPressure 		1	atm
+SetLegacyOSppPrint
+SetOutletsVideoPrint
+
+//
+@Reactor 		R1
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+
+ResidenceTime		0.009025 s
+
+Inlet_stream		8
+Outlet_stream		9
+
+//
+@Reactor 		R2
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.006628 s
+
+Inlet_stream		10
+Outlet_stream		11
+
+//
+@Reactor 		R3
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.04494 s
+
+Inlet_stream		15
+Outlet_stream		16
+
+//
+@Reactor 		R4
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.4239 s
+
+Inlet_stream		20
+Outlet_stream		21
+
+//
+@Reactor 		R5
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.3885 s
+
+Inlet_stream		22
+Outlet_stream		23
+
+//
+@Reactor 		R6
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.1339 s
+
+Inlet_stream		24
+Outlet_stream		25
+
+//
+@Reactor 		R7
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.7553 s
+
+Inlet_stream		28
+Outlet_stream		29
+
+//
+@Reactor 		R8
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.6315 s
+
+Inlet_stream		30
+Outlet_stream		31
+
+//
+@Reactor 		R9
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		0.7317 s
+
+Inlet_stream		36
+Outlet_stream		37
+
+//
+@Reactor 		R10
+
+Type			PSR  							
+Phase			Gas
+
+Energy 			Adiabatic
+
+ResidenceTime		187.31 s
+
+Inlet_stream		38
+Outlet_stream		39
+
+
+
+//
+
+@Mixer	 	M1
+
+Energy 			Adiabatic
+
+Inlet_stream		5,6;
+Outlet_stream		8     
+
+//
+
+@Mixer	 	M2
+
+Energy 			Adiabatic
+
+Inlet_stream		4,9,7,26;
+Outlet_stream		10     
+
+//
+
+@Mixer	 	M3
+
+Energy			Adiabatic
+
+Inlet_stream		13,27;
+Outlet_stream		15     
+
+//
+
+@Mixer	 	M4
+
+Energy			Adiabatic
+
+Inlet_stream		18,33;
+Outlet_stream		20     
+
+//
+
+@Mixer	 	M5
+
+Energy			Adiabatic
+
+Inlet_stream		21,40;
+Outlet_stream		22     
+
+//
+
+@Mixer	 	M6
+
+Energy			Adiabatic
+
+Inlet_stream		14,19,34;
+Outlet_stream		24     
+
+//
+
+@Mixer	 	M7
+
+Energy			Adiabatic
+
+Inlet_stream		12,35;
+Outlet_stream		28     
+
+//
+
+@Mixer	 	M8
+
+Energy			Adiabatic
+
+Inlet_stream		3,29;
+Outlet_stream		30     
+
+//
+
+@Mixer	 	M9
+
+Energy			Adiabatic
+
+Inlet_stream		17,32,39;
+Outlet_stream		36     
+
+//
+
+@Splitter		S1
+  
+Outlet_stream 4,0.6262
+			5,0.3738;
+Inlet_stream 	1	
+
+//
+
+@Splitter		S2
+  
+Outlet_stream 6,0.3832
+			7,0.6168;
+Inlet_stream 	2	
+
+//
+
+@Splitter		S3
+  
+Outlet_stream 12,0.2624
+			13,0.4472 
+			14,0.2904;
+Inlet_stream 	11
+
+//
+
+@Splitter		S4
+  
+Outlet_stream 17,0.3286
+			18,0.3810 
+			19,0.2904;
+Inlet_stream 	16
+
+//
+
+@Splitter		S5
+  
+Outlet_stream 26,0.3271
+			27,0.6729;
+Inlet_stream 	25
+
+//
+
+@Splitter		S6
+  
+Outlet_stream 32,0.4794
+			33,0.0905
+			34,0.0980
+			35,0.3321;
+
+Inlet_stream 	31
+
+//
+
+@Splitter		S7
+  
+Outlet_stream 38,0.011
+			40,0.989;
+
+Inlet_stream 	37
+
+
+
+//
+
+@Stream 1
+	Phase		 	Gas
+
+			 	
+	MassFlowRate	 	15.800 kg/s 	
+		
+	
+Temperature		1000 K
+
+MassFraction		CO 0.08488
+				N2 0.69117
+				O2 0.21180
+                     CO2 0.00041
+                     H2 0.01174;
+//
+
+@Stream 2
+	Phase		 	Gas
+
+			 	
+	MassFlowRate	 	21.676 kg/s 	
+		
+	
+Temperature		1000 K
+
+MassFraction		N2 0.75527
+				O2 0.23144
+                     CO2 0.00045
+                     H2 0.01284;
+//
+@Stream 3
+	Phase		 	Gas
+
+			 	
+	MassFlowRate	 	84.282 kg/s 	
+		
+	
+Temperature		1000 K
+
+MassFraction		N2 0.75527
+				O2 0.23144
+                     CO2 0.00045
+                     H2 0.01284;
+//
+
+

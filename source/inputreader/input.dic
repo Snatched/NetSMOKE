@@ -1,0 +1,207 @@
+
+Reactor 		R1
+
+Type			PFR  							
+Phase			Mix
+
+Energy 			Adiabatic
+
+ResidenceTime		10 s
+
+Inlet_stream		1
+Outlet_stream		2
+
+
+//
+
+
+Reactor	 		R2
+Phase			Solid
+Type			PFR
+
+Energy			Adiabatic
+
+ResidenceTime		37.92 s     
+
+Inlet_stream		18
+Outlet_stream		5     
+
+//
+
+Reactor			R3
+  
+Type			PSR
+Phase			Mix
+
+Energy			HeatExchanger
+
+UA			680.34 W/K 
+                                                       
+ResidenceTime	 	3.845 s
+
+Inlet_stream		8
+Outlet_stream		9
+
+
+
+//
+
+
+Reactor	 		R4
+Phase			Gas
+Type			PSR
+
+Energy			Isothermal
+Temperature		600.34 K
+
+ResidenceTime		10 s     
+
+Inlet_stream		11
+Outlet_stream		13    
+
+//
+Reactor	 		R5
+Phase			Mix
+Type			PSR
+
+Energy			Adiabatic
+
+ResidenceTime		15.78 s     
+
+Inlet_stream		25
+Outlet_stream		26  
+
+
+//
+Mixer		M1
+Energy	Adiabatic
+
+Inlet_stream		20,7,13,22
+Outlet_stream		8
+
+
+
+//
+
+Mixer		M2
+Energy		Isothermal
+Temperature	200 K
+Inlet_stream		17,3,21,23
+Outlet_stream		18
+
+//
+Mixer		M3
+Energy		Adiabatic
+
+Inlet_stream		15,12
+Outlet_stream		25
+
+//
+
+
+
+
+
+
+Splitter S1
+
+Outlet_stream		3,0.25
+			4,0.75 ;
+			
+			
+Inlet_stream		2			
+
+//
+
+Splitter S2
+Inlet_stream		5
+Outlet_stream		6,0.72
+			7,0.18
+			17, 0.1;
+			
+
+
+
+//
+
+
+	
+
+
+
+
+Phase-splitter PS1
+
+Outlet_stream	11,Liquid
+		12,Gas
+		15,Solid ;
+
+Inlet_stream	10
+
+//
+Phase-splitter PS2
+
+Outlet_stream	20,Gas
+		21,Solid ;
+		
+
+Inlet_stream	4
+
+//
+Phase-splitter PS3
+
+Outlet_stream	22,Gas
+		23,Solid ;
+		
+
+Inlet_stream	6
+
+//
+
+Stream 1
+	Phase		 	Solid
+	
+			 	
+	MassFlowRate	 	45.7  kg/s 	
+		
+	
+Temperature		333.8 K
+	MassFraction		C 0.54
+				H 0.26
+				O 0.1
+				N 0.1;
+SolidType	 	Biomass 
+
+
+	
+
+//
+
+Stream 10
+
+MassFraction			CH4 0.5
+				C 0.5 ;
+Phase Mix
+
+MassFlowRate		60 kg/s
+Temperature		356.7 K
+
+//
+
+
+Stream 15
+	Phase Solid
+
+Temperature		356.7 K
+MassFraction	CH4	0.6;
+
+//
+
+	
+
+
+
+
+
+
+

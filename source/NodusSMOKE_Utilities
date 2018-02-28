@@ -1,0 +1,62 @@
+/*-----------------------------------------------------------------------*\
+|																		  |
+|	_   _           _            _____ __  __  ____  _  ________  		  |
+|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
+|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
+|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
+|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
+|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|                                                                         |
+|   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
+|   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
+|   Department of Chemistry, Materials and Chemical Engineering           |
+|   Politecnico di Milano                                                 |
+|   P.zza Leonardo da Vinci 32, 20133 Milano                              |
+|                                                                         |
+\*-----------------------------------------------------------------------*/
+
+/////////////////////////
+////// UTILITIES ////////
+/////////////////////////
+
+
+#include "boost/filesystem.hpp"
+#include "cstdlib"
+#include "string"
+#include "vector"
+
+// OpenSMOKE++ Definitions
+#include "OpenSMOKEpp"
+
+// CHEMKIN Preprocessor
+#include "preprocessing/PreProcessor_CHEMKIN"
+
+// CHEMKIN maps
+#include "maps/Maps_CHEMKIN"
+
+// Utilities
+#include "idealreactors/utilities/Utilities"
+#include "utilities/ropa/OnTheFlyROPA.h"
+#include "utilities/ontheflypostprocessing/OnTheFlyPostProcessing.h"
+
+// PolimiSoot Analyzer
+#include "utilities/soot/polimi/OpenSMOKE_PolimiSoot_Analyzer.h"
+
+
+// NLS Solver
+#include "math/native-nls-solvers/NonLinearSystemSolver"
+
+
+// ODE Solver
+#include "math/native-ode-solvers/MultiValueSolver"
+
+//////////////////////////
+///// INPUT/OUTPUT ///////
+//////////////////////////
+
+//Data structures
+#include "DataStructures.h"
+
+//Input reader
+#include "inputreader/InputReader.h"
+

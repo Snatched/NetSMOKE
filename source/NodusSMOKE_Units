@@ -1,0 +1,50 @@
+/*-----------------------------------------------------------------------*\
+|																		  |
+|	_   _           _            _____ __  __  ____  _  ________  		  |
+|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
+|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
+|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
+|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
+|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|                                                                         |
+|   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
+|   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
+|   Department of Chemistry, Materials and Chemical Engineering           |
+|   Politecnico di Milano                                                 |
+|   P.zza Leonardo da Vinci 32, 20133 Milano                              |
+|                                                                         |
+\*-----------------------------------------------------------------------*/
+
+/////////////////////////
+///////// UNITS /////////
+/////////////////////////
+
+// Common interface
+#include "Units.h"
+
+// Mixers
+#include "mixers/Units_Mixer_Adiabatic.h"
+#include "mixers/Units_Mixer_Isothermal.h"
+
+// Splitters
+#include "splitters/Units_Splitter.h"
+
+// Phase separators
+#include "phaseseparator/Units_PhaseSeparator.h"
+
+// Reactors
+
+	// PSR
+		#include  "reactors/PSR/Units_Reactors_PSR.h"
+			// Isothermal
+				#include  "reactors/PSR/Units_Reactors_PSR_Isothermal.h"
+				#include  "reactors/PSR/Units_Reactors_SolidPSR_Isothermal.h"
+			// Non Isothermal
+				#include  "reactors/PSR/Units_Reactors_PSR_NonIsothermal.h"
+
+	// PFR
+		#include  "reactors/PFR/Units_Reactors_PFR.h"
+			// Isothermal
+				#include  "reactors/PFR/Units_Reactors_PFR_Isothermal.h"
+			// Non Isothermal
+				#include  "reactors/PFR/Units_Reactors_PFR_NonIsothermal.h"

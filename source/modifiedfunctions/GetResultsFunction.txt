@@ -1,0 +1,20 @@
+	###H
+	/**
+		*@brief Return final mass fraction, mole fraction, conentration and rate of production for every species in dedicated vectors
+		*@param final_omega empty vector to fill with output omega values
+		*@param final_mole_fraction empty vector to fill with output mole fraction values
+		*@param final_concentration empty vector to fill with output concentration values
+		*@param final_reaction_rates empty vector to fill with reaction rates (constant due to the isothermicity)
+		*/
+		void GetFinalResults(OpenSMOKE::OpenSMOKEVectorDouble &final_omega, OpenSMOKE::OpenSMOKEVectorDouble &final_mole_fraction, OpenSMOKE::OpenSMOKEVectorDouble &final_concentrations, OpenSMOKE::OpenSMOKEVectorDouble &final_formation_rates);
+
+	
+	###HPP
+	void PerfectlyStirredReactor_Isothermal_ConstantPressure::GetFinalResults(OpenSMOKE::OpenSMOKEVectorDouble &final_omega, OpenSMOKE::OpenSMOKEVectorDouble &final_mole_fraction, OpenSMOKE::OpenSMOKEVectorDouble &final_concentrations, OpenSMOKE::OpenSMOKEVectorDouble &final_formation_rates)
+	{
+
+		final_omega = omega_;	//!< current mass fractions
+		final_mole_fraction=x_;		//!< current mole fractions
+		final_concentrations=c_;		//!< current concentrations [kmol/m3]
+		final_formation_rates=R_;		//!< current formation rates [kmol/m3/s]
+	}
