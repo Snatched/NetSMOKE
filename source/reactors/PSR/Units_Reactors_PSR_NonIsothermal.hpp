@@ -68,7 +68,7 @@ namespace NodusSMOKE{
 		psr.Solve(1.e8);
 
 		// Local data storing
-		psr.GetFromationRates_HeatRelease_Density( Rgas, Qr, StreamOut.rho_gas);
+		psr.GetFormationRates_HeatRelease_Density( Rgas, Qr, StreamOut.rho_gas);
 		psr.GetFinalStatus(StreamOut.temperature, StreamOut.pressure, StreamOut.omega_gas);
 		
 		StreamOut.mass_flow_rate_gas = StreamIn.mass_flow_rate_gas;
