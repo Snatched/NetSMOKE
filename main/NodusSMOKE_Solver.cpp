@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 	boost::filesystem::path kinetic_folder = working_folder / "kinetics";
 	boost::filesystem::path output_folder = working_folder / "output";
 	boost::filesystem::path backup_folder = working_folder / "backup";
-	boost::filesystem::path track_folder = working_folder / "track";
+	boost::filesystem::path track_folder = working_folder / "RTD";
 	OpenSMOKE::CreateDirectory(output_folder);
 
 	// Prepare structures
