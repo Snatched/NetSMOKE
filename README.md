@@ -1,4 +1,4 @@
-# NodusSMOKE
+# NetSMOKE
 Reactor network analysis framework for multi phase and single phase reactors for the OpenSMOKE++ Suite from CRECK Group @ Politecnico di Milano
 
 #### --- Author ---
