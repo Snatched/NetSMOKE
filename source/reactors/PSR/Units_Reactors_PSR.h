@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	 _   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,8 +15,8 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_UNITS_REACTORS_PSR_H
-#define NODUSSMOKE_UNITS_REACTORS_PSR_H
+#ifndef NETSMOKE_UNITS_REACTORS_PSR_H
+#define NETSMOKE_UNITS_REACTORS_PSR_H
 
 // Parent class
 #include "Units.h"
@@ -24,29 +24,29 @@
 // Relative reactor
 #include "idealreactors/psr/PerfectlyStirredReactor"
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 	class Units_Reactors_PSR : public Units {
 	public:
 		/* Default constructor */
-		Units_Reactors_PSR(NodusSMOKE::UnitInfo unit_data) : 
+		Units_Reactors_PSR(NetSMOKE::UnitInfo unit_data) : 
 			Units(unit_data)
 				{
 					residence_time_ = unit_data.residence_time;
 				};
 
 		/* Solve */
-		virtual int Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) { return 0; };
+		virtual int Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure) { return 0; };
 
 		/* Get Residuals */
-		virtual int GetResiduals( OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) { return 0; };
+		virtual int GetResiduals( OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure) { return 0; };
 
 		/* Print reactor status */
-		virtual void PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){};
+		virtual void PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){};
 
 		/* RTD aware solver */
-		virtual int RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {return 0;};
+		virtual int RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {return 0;};
 		
 	protected:
 	
@@ -54,9 +54,9 @@ namespace NodusSMOKE
 		bool is_oscillating;
 
 		// Working structures
-		NodusSMOKE::StreamInfo StreamOut;
-		NodusSMOKE::StreamInfo StreamIn;
-		NodusSMOKE::StreamInfo StreamOut_star;	// given by solver
+		NetSMOKE::StreamInfo StreamOut;
+		NetSMOKE::StreamInfo StreamIn;
+		NetSMOKE::StreamInfo StreamOut_star;	// given by solver
 
 		// Indexes
 		int Nstreams;
@@ -85,4 +85,4 @@ namespace NodusSMOKE
 	
 }
 
-#endif /* NODUSSMOKE_UNITS_REACTORS_PSR_H */
+#endif /* NETSMOKE_UNITS_REACTORS_PSR_H */

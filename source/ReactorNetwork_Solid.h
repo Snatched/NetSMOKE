@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	 _   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,13 +15,13 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_REACTORNETWORK_SOLID_H
-#define NODUSSMOKE_REACTORNETWORK_SOLID_H
+#ifndef NETSMOKE_REACTORNETWORK_SOLID_H
+#define NETSMOKE_REACTORNETWORK_SOLID_H
 
 // Include the Reactor Network Main Class
 #include "ReactorNetwork.h"
-#include "NodusSMOKE_Units"
-#include "NodusSMOKE_Utilities"
+#include "NetSMOKE_Units"
+#include "NetSMOKE_Utilities"
 
 
 	//!  A class for simulating multi phase (gas/solid) reactor networks
@@ -29,7 +29,7 @@
 	The purpose of this class is to simulate reactor network which have multiphase streams.
 	*/
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 	class ReactorNetwork_Solid : public ReactorNetwork 
@@ -59,8 +59,8 @@ namespace NodusSMOKE
 				OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN* thermodynamicsMapSolid,
 				OpenSMOKE::KineticsMap_Solid_CHEMKIN* kineticsMapSolid,
 				double rho_solid,
-				std::vector<NodusSMOKE::Units*> *DeviceMap,
-				std::vector<NodusSMOKE::StreamInfo>* StreamMap,
+				std::vector<NetSMOKE::Units*> *DeviceMap,
+				std::vector<NetSMOKE::StreamInfo>* StreamMap,
 				OpenSMOKE::OpenSMOKEVectorDouble FirstGuessY,
 				std::vector<Eigen::Triplet<int>>* InputTripletsVector,
 				bool input_flag_sequential_solver
@@ -154,4 +154,4 @@ namespace NodusSMOKE
 
 #include "ReactorNetwork_Solid.hpp"
 
-#endif /* NODUSSMOKE_REACTORNETWORK_SOLID_H */
+#endif /* NETSMOKE_REACTORNETWORK_SOLID_H */

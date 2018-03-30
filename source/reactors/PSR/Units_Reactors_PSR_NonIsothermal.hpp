@@ -1,7 +1,7 @@
 
-namespace NodusSMOKE{
+namespace NetSMOKE{
 
-	Units_Reactors_PSR_NonIsothermal::Units_Reactors_PSR_NonIsothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, OpenSMOKE::KineticsMap_CHEMKIN *kineticsMapXML, NodusSMOKE::UnitInfo unit_data) :
+	Units_Reactors_PSR_NonIsothermal::Units_Reactors_PSR_NonIsothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, OpenSMOKE::KineticsMap_CHEMKIN *kineticsMapXML, NetSMOKE::UnitInfo unit_data) :
 		thermodynamicsMap(*thermodynamicsMapXML),
 		kineticsMap(*kineticsMapXML),
 		Units_Reactors_PSR(unit_data)
@@ -41,7 +41,7 @@ namespace NodusSMOKE{
 	};
 
 
-	int Units_Reactors_PSR_NonIsothermal::Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {
+	int Units_Reactors_PSR_NonIsothermal::Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {
 		
 		StreamIn = streams_data_structure[inlets_[0]];
 
@@ -83,7 +83,7 @@ namespace NodusSMOKE{
 	};
 
 	/* Get Residuals */
-	int Units_Reactors_PSR_NonIsothermal::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	int Units_Reactors_PSR_NonIsothermal::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 
 		StreamOut_star = streams_data_structure[outlets_[0]];
 
@@ -129,7 +129,7 @@ namespace NodusSMOKE{
 	};
 
 	/* Solve sequentially */
-	int Units_Reactors_PSR_NonIsothermal::NonIterativeSolve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure)
+	int Units_Reactors_PSR_NonIsothermal::NonIterativeSolve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure)
 	{
 		Units_Reactors_PSR_NonIsothermal::Solve(streams_data_structure);
 		streams_data_structure[outlets_[0]].mass_flow_rate_gas = StreamOut.mass_flow_rate_gas;
@@ -140,13 +140,13 @@ namespace NodusSMOKE{
 	};
 
 	/* Solve for RTD */
-	int Units_Reactors_PSR_NonIsothermal::RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {
+	int Units_Reactors_PSR_NonIsothermal::RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {
 		Units_Reactors_PSR_NonIsothermal::GetResiduals(residuals, streams_data_structure);
 		return 0;
 	}
 
 	/* Print reactor status */
-	void Units_Reactors_PSR_NonIsothermal::PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	void Units_Reactors_PSR_NonIsothermal::PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		
 		boost::filesystem::path output = output_folder / name_;
 		OpenSMOKE::CreateDirectory(output);

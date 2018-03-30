@@ -1,8 +1,8 @@
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 	// CONSTRUCTOR (REQUIRES INLET STREAM, SPLIT RATIO, )
-	Units_Mixer_Adiabatic::Units_Mixer_Adiabatic(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, NodusSMOKE::UnitInfo unit_data) :
+	Units_Mixer_Adiabatic::Units_Mixer_Adiabatic(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, NetSMOKE::UnitInfo unit_data) :
 		thermodynamicsMap(*thermodynamicsMapXML),
 		Units(unit_data)
 	{
@@ -27,7 +27,7 @@ namespace NodusSMOKE
 	};
 
 	// SOLVE THE MIXER
-	int Units_Mixer_Adiabatic::Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure)
+	int Units_Mixer_Adiabatic::Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure)
 	{
 
 		for ( unsigned int i = 1; i<= inlets_.size(); ++i){
@@ -87,13 +87,13 @@ namespace NodusSMOKE
 	};
 
 		/* Residual obtainer - RETURNS ERROR IF YOU CALL RESIDUALS FOR TRIVIAL UNITS */
-	int Units_Mixer_Adiabatic::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure)
+	int Units_Mixer_Adiabatic::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure)
 	{
 		OpenSMOKE::FatalErrorMessage(" Residuals have been requested for a trivial unit (MIXER). Please check your input file or contact Matteo Mensi at matteo.mensi@mail.polimi.it");
 		return 0;
 	};
 
-	void Units_Mixer_Adiabatic::PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	void Units_Mixer_Adiabatic::PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		OpenSMOKE::FatalErrorMessage(" No status printer for mixer yet");
 	}
 

@@ -1,9 +1,9 @@
 
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
-	Units_Reactors_PFR_Isothermal::Units_Reactors_PFR_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, OpenSMOKE::KineticsMap_CHEMKIN *kineticsMapXML, NodusSMOKE::UnitInfo unit_data)
+	Units_Reactors_PFR_Isothermal::Units_Reactors_PFR_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, OpenSMOKE::KineticsMap_CHEMKIN *kineticsMapXML, NetSMOKE::UnitInfo unit_data)
 		:
 		thermodynamicsMap(*thermodynamicsMapXML),
 		kineticsMap(*kineticsMapXML),
@@ -50,7 +50,7 @@ namespace NodusSMOKE
 	};
 
 
-	int Units_Reactors_PFR_Isothermal::Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {
+	int Units_Reactors_PFR_Isothermal::Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {
 		
 		if (n_calls > 1) {
 			Previous_StreamIn = StreamIn;
@@ -87,7 +87,7 @@ namespace NodusSMOKE
 	};
 
 	/* Get Residuals */
-	int Units_Reactors_PFR_Isothermal::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	int Units_Reactors_PFR_Isothermal::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		StreamOut_star = streams_data_structure[outlets_[0]];
 		// Species composition
 		for (int i = 1; i <= thermodynamicsMap.NumberOfSpecies(); ++i)
@@ -102,7 +102,7 @@ namespace NodusSMOKE
 	};
 
 	/* Solve for RTD */
-	int Units_Reactors_PFR_Isothermal::RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {
+	int Units_Reactors_PFR_Isothermal::RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {
 		 
 		
 		if (inert_in == false) {
@@ -135,7 +135,7 @@ namespace NodusSMOKE
 	};
 
 	/* Solve sequentially */
-	int Units_Reactors_PFR_Isothermal::NonIterativeSolve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure)
+	int Units_Reactors_PFR_Isothermal::NonIterativeSolve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure)
 	{
 		
 		Units_Reactors_PFR_Isothermal::Solve(streams_data_structure);
@@ -150,7 +150,7 @@ namespace NodusSMOKE
 
 
 	/* Print reactor status */
-	void Units_Reactors_PFR_Isothermal::PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	void Units_Reactors_PFR_Isothermal::PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		
 		
 		boost::filesystem::path output = output_folder / name_;

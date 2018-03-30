@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	 _   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -16,33 +16,33 @@
 \*-----------------------------------------------------------------------*/
 
 /*
-Collection of auxiliary functions used in the NodusSMOKE solver
-These functions are not needed for correct functioning of NodusSMOKE as a framework
+Collection of auxiliary functions used in the NetSMOKE solver
+These functions are not needed for correct functioning of NetSMOKE as a framework
 but are useful in the author's use case.
 */
 
-#ifndef NODUSSMOKE_FUNCTIONS_H
-#define NODUSSMOKE_FUNCTIONS_H
+#ifndef NETSMOKE_FUNCTIONS_H
+#define NETSMOKE_FUNCTIONS_H
 
 // For first guess generators
 #include "idealreactors/psr/PerfectlyStirredReactor"
 #include "solidreactors/solidpsr/SolidPerfectlyStirredReactor"
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
-    void NodusSMOKE_Logo(){
+    void NetSMOKE_Logo(){
 
 		std::cout << "-----------------------------------------------------------------------------" << std::endl;
 		std::cout << std::endl;
         
 		std::cout << R"(
-            _   _           _            _____ __  __  ____  _  ________        
-           | \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____|       
-           |  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__          
-           | . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|         
-           | |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____        
-           |_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|       
+		 _   _      _    _____ __  __  ____  _  ________ 
+		| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|
+		|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   
+		| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  
+		| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 
+		|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|   
 		)"
 		<< '\n';
                                                                                                                                           
@@ -59,10 +59,10 @@ namespace NodusSMOKE
 		std::cout << "-----------------------------------------------------------------------------" << std::endl;
 		std::cout << "" << std::endl;
 		std::cout << "                                  WARNING                                    " << std::endl;
-		std::cout << "    This version of NodusSMOKE can be used for educational purposes only.    " << std::endl;
+		std::cout << "    This version of NetSMOKE can be used for educational purposes only.    " << std::endl;
 		std::cout << "       The software is and remains the sole property of Matteo Mensi.        " << std::endl;
-		std::cout << "           Whenever NodusSMOKE is used to produce any publication,     	   " << std::endl;
-		std::cout << "           a detailed reference to the OpenSMOKE++ and NodusSMOKE            " << std::endl;
+		std::cout << "           Whenever NetSMOKE is used to produce any publication,     	   " << std::endl;
+		std::cout << "           a detailed reference to the OpenSMOKE++ and NetSMOKE            " << std::endl;
 		std::cout << "                  code should be reported (see User's Guide).                " << std::endl;
 		std::cout << "    Use for commercial purposes is not permitted. For any commercial issue   " << std::endl;
 		std::cout << "         please contact Alberto Cuoci (email: alberto.cuoci@polimi.it)       " << std::endl;
@@ -82,7 +82,7 @@ namespace NodusSMOKE
 		std::cout << "" << std::endl;
     }
 
-	int GasPhaseCase_FirstGuessGenerator(std::vector<NodusSMOKE::UnitInfo> Unit, std::vector<NodusSMOKE::StreamInfo> Stream, std::vector<int> From,
+	int GasPhaseCase_FirstGuessGenerator(std::vector<NetSMOKE::UnitInfo> Unit, std::vector<NetSMOKE::StreamInfo> Stream, std::vector<int> From,
 	OpenSMOKE::OpenSMOKEVectorDouble &first_guess,
 	OpenSMOKE::ThermodynamicsMap_CHEMKIN* thermodynamicsMapXML,
 	OpenSMOKE::KineticsMap_CHEMKIN* kineticsMapXML)	
@@ -111,8 +111,8 @@ namespace NodusSMOKE
 		int target = std::distance(residence_time_vect.begin(), std::min_element(residence_time_vect.begin(), residence_time_vect.end()));
 		double tau_1st = 0.5*residence_time_vect[target];
 
-		std::vector<NodusSMOKE::StreamInfo> stream_inlet_vect;
-		NodusSMOKE::StreamInfo StreamIn;
+		std::vector<NetSMOKE::StreamInfo> stream_inlet_vect;
+		NetSMOKE::StreamInfo StreamIn;
 		StreamIn.pressure = Stream[0].pressure;
 
 		OpenSMOKE::ChangeDimensions(NS, &StreamIn.omega_gas, true);
@@ -181,7 +181,7 @@ namespace NodusSMOKE
 		return 0;
 	};
 
-	int SolidPhaseCase_FirstGuessGenerator(double solid_density, std::vector<NodusSMOKE::UnitInfo> Unit, std::vector<NodusSMOKE::StreamInfo> Stream, std::vector<int> From,
+	int SolidPhaseCase_FirstGuessGenerator(double solid_density, std::vector<NetSMOKE::UnitInfo> Unit, std::vector<NetSMOKE::StreamInfo> Stream, std::vector<int> From,
 	OpenSMOKE::OpenSMOKEVectorDouble &first_guess,
 	OpenSMOKE::ThermodynamicsMap_CHEMKIN* thermodynamicsMapXML,
 	OpenSMOKE::KineticsMap_CHEMKIN* kineticsMapXML,
@@ -341,9 +341,9 @@ namespace NodusSMOKE
 		return 0;
 	}
 
-	int CreateUnitObjectsFromRawData(std::vector<NodusSMOKE::UnitInfo> Unit,
+	int CreateUnitObjectsFromRawData(std::vector<NetSMOKE::UnitInfo> Unit,
 									double rho_solid,
-									std::vector<NodusSMOKE::Units*> &Device,
+									std::vector<NetSMOKE::Units*> &Device,
 									OpenSMOKE::ThermodynamicsMap_CHEMKIN* thermodynamicsMapXML,
 									OpenSMOKE::KineticsMap_CHEMKIN* kineticsMapXML,
 									OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN* thermodynamicsMapSolidXML,
@@ -359,52 +359,52 @@ namespace NodusSMOKE
 				if (Unit[j].type == "PSR") {
 					if (Unit[j].energy == "Isothermal") {
 						if (Unit[j].phase == "Gas"){
-							Device[j] = new NodusSMOKE::Units_Reactors_PSR_Isothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j] );
+							Device[j] = new NetSMOKE::Units_Reactors_PSR_Isothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j] );
 						}
 						else if (Unit[j].phase == "Solid" || Unit[j].phase == "Mix"){
-							Device[j] = new NodusSMOKE::Units_Reactors_SolidPSR_Isothermal(thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML, rho_solid, Unit[j]);
+							Device[j] = new NetSMOKE::Units_Reactors_SolidPSR_Isothermal(thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML, rho_solid, Unit[j]);
 						}
 					}
 					else if (Unit[j].energy == "NonIsothermal") {
-						Device[j] = new NodusSMOKE::Units_Reactors_PSR_NonIsothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j]);
+						Device[j] = new NetSMOKE::Units_Reactors_PSR_NonIsothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j]);
 
 					}
 				}
 				if (Unit[j].type == "PFR") {
 					if (Unit[j].energy == "Isothermal") {
-						Device[j] = new NodusSMOKE::Units_Reactors_PFR_Isothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j]);
+						Device[j] = new NetSMOKE::Units_Reactors_PFR_Isothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j]);
 
 					}
 					else if (Unit[j].energy == "NonIsothermal") {
-						Device[j] = new NodusSMOKE::Units_Reactors_PFR_NonIsothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j]);
+						Device[j] = new NetSMOKE::Units_Reactors_PFR_NonIsothermal(thermodynamicsMapXML, kineticsMapXML, Unit[j]);
 
 					}
 				}
 			}
 			else if (Unit[j].tag == "Mixer"){
 				if (Unit[j].energy == "Adiabatic"){
-					Device[j] = new NodusSMOKE::Units_Mixer_Adiabatic(thermodynamicsMapXML, Unit[j]);
+					Device[j] = new NetSMOKE::Units_Mixer_Adiabatic(thermodynamicsMapXML, Unit[j]);
 
 				}
 				else if (Unit[j].energy == "Isothermal"){
 					if (rho_solid > 0.) {
-						Device[j] = new NodusSMOKE::Units_Mixer_Isothermal(thermodynamicsMapSolidXML, Unit[j]);
+						Device[j] = new NetSMOKE::Units_Mixer_Isothermal(thermodynamicsMapSolidXML, Unit[j]);
 					}
 					else {
-						Device[j] = new NodusSMOKE::Units_Mixer_Isothermal(thermodynamicsMapXML, Unit[j]);
+						Device[j] = new NetSMOKE::Units_Mixer_Isothermal(thermodynamicsMapXML, Unit[j]);
 					}
 
 				}
 			}
 			else if (Unit[j].tag == "Splitter"){
-				Device[j] = new NodusSMOKE::Units_Splitter(Unit[j]);
+				Device[j] = new NetSMOKE::Units_Splitter(Unit[j]);
 			}
 			else if (Unit[j].tag == "PhaseSplitter"){
-				Device[j] = new NodusSMOKE::Units_PhaseSeparator(thermodynamicsMapSolidXML, Unit[j]);
+				Device[j] = new NetSMOKE::Units_PhaseSeparator(thermodynamicsMapSolidXML, Unit[j]);
 			}
 		}
 		return 0;
 	}
 }
 
-#endif /* NODUSSMOKE_FUNCTIONS_H  */
+#endif /* NETSMOKE_FUNCTIONS_H  */

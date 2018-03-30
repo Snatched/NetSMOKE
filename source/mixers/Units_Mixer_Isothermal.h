@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	_   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,8 +15,8 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_UNITS_MIXER_ISOTHERMAL_H
-#define NODUSSMOKE_UNITS_MIXER_ISOTHERMAL_H
+#ifndef NETSMOKE_UNITS_MIXER_ISOTHERMAL_H
+#define NETSMOKE_UNITS_MIXER_ISOTHERMAL_H
 
 // A class to evaluate isothermal mixers in a RNM
 
@@ -25,7 +25,7 @@
 // CHEMKIN maps
 #include "maps/Maps_CHEMKIN"
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 class Units_Mixer_Isothermal : public Units
@@ -33,17 +33,17 @@ class Units_Mixer_Isothermal : public Units
 public: // FUNCTIONS
 
 	// CONSTRUCTOR
-	Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, NodusSMOKE::UnitInfo unit_data);
+	Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, NetSMOKE::UnitInfo unit_data);
 
 	// ALTERNATIVE CONSTRUCTOR
-	Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN *thermodynamicsMapXML, NodusSMOKE::UnitInfo unit_data);
+	Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN *thermodynamicsMapXML, NetSMOKE::UnitInfo unit_data);
 
 	// MIXING OPERATION
-	int Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+	int Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
-	int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+	int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
-	void PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+	void PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
 private: // INTERNAL VARIABLES
 
@@ -61,7 +61,7 @@ private: // INTERNAL VARIABLES
 	// Inlet structures
 	OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMap = nullptr;
 	OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN *thermodynamicsMapS = nullptr;
-	NodusSMOKE::StreamInfo StreamOut;
+	NetSMOKE::StreamInfo StreamOut;
 
 	// Booleans
 	bool contains_gas;
@@ -76,4 +76,4 @@ private: // INTERNAL VARIABLES
 
 #include "Units_Mixer_Isothermal.hpp"
 
-#endif /* NODUSSMOKE_UNITS_MIXER_ISOTHERMAL_H */
+#endif /* NETSMOKE_UNITS_MIXER_ISOTHERMAL_H */

@@ -1,10 +1,10 @@
 
-namespace NodusSMOKE
+namespace NetSMOKE
 
 {
 
 	// Constructor for gas phase case
-	Units_Mixer_Isothermal::Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, NodusSMOKE::UnitInfo unit_data) :
+	Units_Mixer_Isothermal::Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapXML, NetSMOKE::UnitInfo unit_data) :
 		thermodynamicsMap(thermodynamicsMapXML),
 		Units(unit_data)
 	{
@@ -25,7 +25,7 @@ namespace NodusSMOKE
 	};
 
 	// Alternative construction for solid species case
-	Units_Mixer_Isothermal::Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN *thermodynamicsMapXML, NodusSMOKE::UnitInfo unit_data) :
+	Units_Mixer_Isothermal::Units_Mixer_Isothermal(OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN *thermodynamicsMapXML, NetSMOKE::UnitInfo unit_data) :
 		thermodynamicsMapS(thermodynamicsMapXML),
 		Units(unit_data)
 	{
@@ -48,7 +48,7 @@ namespace NodusSMOKE
 	};
 
 	// SOLVE THE MIXER
-	int Units_Mixer_Isothermal::Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure)
+	int Units_Mixer_Isothermal::Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure)
 	{
 
 		// Mixture Gas composition
@@ -110,13 +110,13 @@ namespace NodusSMOKE
 	};
 
 	/* Residual obtainer - RETURNS ERROR IF YOU CALL RESIDUALS FOR TRIVIAL UNITS */
-	int Units_Mixer_Isothermal::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure)
+	int Units_Mixer_Isothermal::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure)
 	{
 		OpenSMOKE::FatalErrorMessage(" Residuals have been requested for a trivial unit (MIXER). Please check your input file or contact Matteo Mensi at matteo.mensi@mail.polimi.it");
 		return 0;
 	};
 
-	void Units_Mixer_Isothermal::PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	void Units_Mixer_Isothermal::PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		OpenSMOKE::FatalErrorMessage("No status printer for mixers yet");
 	}
 

@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	 _   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -18,14 +18,14 @@
 #include "OpenSMOKEpp" 				// OpenSMOKE definitions
 #include "vector"  					// std vector
 #include "iostream" 				// input output stream
-#include "NodusSMOKE"  				// NodusSMOKE comprehensive header
-#include "NodusSMOKE_Functions.h" 	// Extra functions to help with the main.cpp
+#include "NetSMOKE"  				// NetSMOKE comprehensive header
+#include "NetSMOKE_Functions.h" 	// Extra functions to help with the main.cpp
 #include "ReactorNetwork.h"
 #include "ReactorNetwork_Gas.h"
 
 int main(int argc, char** argv) {
 
-	NodusSMOKE::NodusSMOKE_Logo();
+	NetSMOKE::NetSMOKE_Logo();
 
 	boost::filesystem::path executable_file = OpenSMOKE::GetExecutableFileName(argv);
 	boost::filesystem::path executable_folder = executable_file.parent_path();
@@ -39,8 +39,8 @@ int main(int argc, char** argv) {
 	OpenSMOKE::CreateDirectory(output_folder);
 
 	// Prepare structures
-	std::vector<NodusSMOKE::UnitInfo> Unit;
-	std::vector<NodusSMOKE::StreamInfo> Stream;
+	std::vector<NetSMOKE::UnitInfo> Unit;
+	std::vector<NetSMOKE::StreamInfo> Stream;
 	std::vector<int> From;
 	std::vector<int> To;
 	std::vector<double> relative_split;
@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
 
 	{
 		// Create the input reading system object
-		NodusSMOKE::InputReader iosystem(working_folder, *thermodynamicsMapXML, *kineticsMapXML, *thermodynamicsMapSolidXML, *kineticsMapSolidXML);
+		NetSMOKE::InputReader iosystem(working_folder, *thermodynamicsMapXML, *kineticsMapXML, *thermodynamicsMapSolidXML, *kineticsMapSolidXML);
 
 		// Run the reader and generate the PDF image of the network
 		iosystem.ReadAndDraw();
@@ -133,9 +133,9 @@ int main(int argc, char** argv) {
     //                                    Prepare device object				                 	   //
 	// ------------------------------------------------------------------------------------------- //
 
-	std::vector<NodusSMOKE::Units*> Device;
+	std::vector<NetSMOKE::Units*> Device;
 
-	NodusSMOKE::CreateUnitObjectsFromRawData(Unit, solid_density, Device, thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML);
+	NetSMOKE::CreateUnitObjectsFromRawData(Unit, solid_density, Device, thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML);
 
 	/* At this point the vector of units as objects is
 	ready to use. These objects are the ones
@@ -219,14 +219,14 @@ int main(int argc, char** argv) {
 		/*			if gas only					  */
 		/*----------------------------------------*/
 		if (solid_case == false) {
-			NodusSMOKE::GasPhaseCase_FirstGuessGenerator(Unit, Stream, From, first_guess, thermodynamicsMapXML, kineticsMapXML);
+			NetSMOKE::GasPhaseCase_FirstGuessGenerator(Unit, Stream, From, first_guess, thermodynamicsMapXML, kineticsMapXML);
 		}
 
 		/*----------------------------------------*/
 		/*			if solid					  */
 		/*----------------------------------------*/
 		if (solid_case == true) {
-			NodusSMOKE::SolidPhaseCase_FirstGuessGenerator(solid_density, Unit, Stream, From, first_guess, thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML);
+			NetSMOKE::SolidPhaseCase_FirstGuessGenerator(solid_density, Unit, Stream, From, first_guess, thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML);
 		}
 
 		std::cout << "DONE" << std::endl;
@@ -266,7 +266,7 @@ int main(int argc, char** argv) {
 		}
 
 	
-		NodusSMOKE::ReactorNetwork_Gas myRNM(thermodynamicsMapXML, kineticsMapXML, &Device, &Stream, first_guess, &triplets_vector_FlowMatrix, &triplets_vector_UnitMatrix, analytical_case);
+		NetSMOKE::ReactorNetwork_Gas myRNM(thermodynamicsMapXML, kineticsMapXML, &Device, &Stream, first_guess, &triplets_vector_FlowMatrix, &triplets_vector_UnitMatrix, analytical_case);
 		std::cout << "Everything is set-up. The solver is being run..." << std::endl;
 		// Solve Network
 
@@ -321,7 +321,7 @@ int main(int argc, char** argv) {
 		//                              Multiphase Gas & Solid Network                                 //
 		// ------------------------------------------------------------------------------------------- //
 
-		NodusSMOKE::ReactorNetwork_Solid myRNM(thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML, solid_density, &Device, &Stream, first_guess, &triplets_vector_FlowMatrix, analytical_case);
+		NetSMOKE::ReactorNetwork_Solid myRNM(thermodynamicsMapXML, kineticsMapXML, thermodynamicsMapSolidXML, kineticsMapSolidXML, solid_density, &Device, &Stream, first_guess, &triplets_vector_FlowMatrix, analytical_case);
 		std::cout << "Everything is set-up. The solver is being run..." << std::endl;
 		// Solve Network
 		if (restart == true) {

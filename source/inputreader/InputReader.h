@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	_   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -17,8 +17,8 @@
 
 
 
-#ifndef NODUSSMOKE_INPUTREADER_H
-#define NODUSSMOKE_INPUTREADER_H
+#ifndef NETSMOKE_INPUTREADER_H
+#define NETSMOKE_INPUTREADER_H
 
 // Boost filesystem handler library
 #include "boost/filesystem.hpp"
@@ -29,7 +29,7 @@
 // CHEMKIN maps
 #include "maps/Maps_CHEMKIN"
 
-#include "NodusSMOKE"
+#include "NetSMOKE"
 
 // LEGACY INCLUDES - SILVIO TRESPI IS RESPONSIBLE
 #include <sstream>
@@ -48,7 +48,7 @@
 
 #include "silviosource/Functions.h"
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
   class InputReader
@@ -101,16 +101,16 @@ namespace NodusSMOKE
         *@brief Copies necessary data over the main file where they will be provided to the ReactorNetwork class object
         *@param
         */
-        void ImportData(std::vector<NodusSMOKE::StreamInfo>& StreamStruct, std::vector<NodusSMOKE::UnitInfo> &UnitStruct, std::vector<int> &From, std::vector<int> &To, std::vector<double> &relative_split );
+        void ImportData(std::vector<NetSMOKE::StreamInfo>& StreamStruct, std::vector<NetSMOKE::UnitInfo> &UnitStruct, std::vector<int> &From, std::vector<int> &To, std::vector<double> &relative_split );
 
     protected:
         /**
         Functions used by ImportData to read info of streams and units
         */
 		void CheckCompositions();
-        void ImportStreams(std::vector<NodusSMOKE::StreamInfo>& StreamStruct);
-        void ImportUnits(std::vector<NodusSMOKE::UnitInfo>& UnitStruct, std::vector<NodusSMOKE::StreamInfo> &StreamStruct);
-        void ImportFlowVectors(std::vector<NodusSMOKE::StreamInfo>& StreamStruct, std::vector<NodusSMOKE::UnitInfo>& UnitStruct,std::vector<int> &MainFrom, std::vector<int> &MainTo, std::vector<double> &Main_relative_split );
+        void ImportStreams(std::vector<NetSMOKE::StreamInfo>& StreamStruct);
+        void ImportUnits(std::vector<NetSMOKE::UnitInfo>& UnitStruct, std::vector<NetSMOKE::StreamInfo> &StreamStruct);
+        void ImportFlowVectors(std::vector<NetSMOKE::StreamInfo>& StreamStruct, std::vector<NetSMOKE::UnitInfo>& UnitStruct,std::vector<int> &MainFrom, std::vector<int> &MainTo, std::vector<double> &Main_relative_split );
 
     private:
 
@@ -183,4 +183,4 @@ namespace NodusSMOKE
 #include "InputReader.hpp"
 
 
-#endif /*NODUSSMOKE_INPUTREADER_H*/
+#endif /*NETSMOKE_INPUTREADER_H*/

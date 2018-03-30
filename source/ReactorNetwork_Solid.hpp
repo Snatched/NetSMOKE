@@ -1,21 +1,21 @@
 
 
 // Interfaces for solvers
-#include "solverinterfaces/NodusSMOKE_ReactorNetwork_sparseNLSinterface.h"
-#include "solverinterfaces/NodusSMOKE_ReactorNetwork_sparseODEinterface.h"
-#include "solverinterfaces/NodusSMOKE_ReactorNetwork_denseNLSinterface.h"
-#include "solverinterfaces/NodusSMOKE_ReactorNetwork_denseODEinterface.h"
+#include "solverinterfaces/NetSMOKE_ReactorNetwork_sparseNLSinterface.h"
+#include "solverinterfaces/NetSMOKE_ReactorNetwork_sparseODEinterface.h"
+#include "solverinterfaces/NetSMOKE_ReactorNetwork_denseNLSinterface.h"
+#include "solverinterfaces/NetSMOKE_ReactorNetwork_denseODEinterface.h"
 // Math
 #include "math/native-nls-solvers/NonLinearSystemSolver"
 #include "math/native-ode-solvers/MultiValueSolver"
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 	// CONSTRUCTOR
 	ReactorNetwork_Solid::ReactorNetwork_Solid(OpenSMOKE::ThermodynamicsMap_CHEMKIN* thermodynamicsMap, OpenSMOKE::KineticsMap_CHEMKIN* kineticsMap, 
 												OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN* thermodynamicsMapSolid, OpenSMOKE::KineticsMap_Solid_CHEMKIN* kineticsMapSolid, 
-												double rho_solid_input, std::vector<NodusSMOKE::Units*> *DeviceMap, std::vector<NodusSMOKE::StreamInfo>* StreamMap,
+												double rho_solid_input, std::vector<NetSMOKE::Units*> *DeviceMap, std::vector<NetSMOKE::StreamInfo>* StreamMap,
 												OpenSMOKE::OpenSMOKEVectorDouble FirstGuessY, std::vector<Eigen::Triplet<int>>* InputTripletsVector, bool input_flag_sequential_solver)
 		:
 			ReactorNetwork(thermodynamicsMap, kineticsMap, DeviceMap, StreamMap, InputTripletsVector),
@@ -320,7 +320,7 @@ namespace NodusSMOKE
 			Eigen::VectorXd yf_eigen(y0_eigen.size());
 
 			// Define the solver
-			typedef NlsSMOKE::KernelSparse<NodusSMOKE_ReactorNetwork_sparseNLSinterface> kernel;
+			typedef NlsSMOKE::KernelSparse<NetSMOKE_ReactorNetwork_sparseNLSinterface> kernel;
 			NlsSMOKE::NonLinearSolver<kernel> nls_solver;
 			nls_solver.SetReactor(this);
 			
@@ -427,7 +427,7 @@ namespace NodusSMOKE
 			Eigen::VectorXd yf_eigen(y0_eigen.size());
 
 			// Define the solver
-			typedef NlsSMOKE::KernelDense<NodusSMOKE_ReactorNetwork_denseNLSinterface> kernel;
+			typedef NlsSMOKE::KernelDense<NetSMOKE_ReactorNetwork_denseNLSinterface> kernel;
 			NlsSMOKE::NonLinearSolver<kernel> nls_solver;
 			nls_solver.SetReactor(this);
 
@@ -542,7 +542,7 @@ namespace NodusSMOKE
 			Eigen::VectorXd yf_eigen(y0_eigen.size());
 
 			// Create the solver
-			typedef OdeSMOKE::KernelSparse<NodusSMOKE_ReactorNetwork_sparseODEinterface> sparseOde;
+			typedef OdeSMOKE::KernelSparse<NetSMOKE_ReactorNetwork_sparseODEinterface> sparseOde;
 			typedef OdeSMOKE::MethodGear<sparseOde> methodGear;
 			OdeSMOKE::MultiValueSolver<methodGear> ode_solver;
 			ode_solver.SetReactor(this);
@@ -657,7 +657,7 @@ namespace NodusSMOKE
 			Eigen::VectorXd yf_eigen(y0_eigen.size());
 
 			// Create the solver
-			typedef OdeSMOKE::KernelDense<NodusSMOKE_ReactorNetwork_denseODEinterface> denseOde;
+			typedef OdeSMOKE::KernelDense<NetSMOKE_ReactorNetwork_denseODEinterface> denseOde;
 			typedef OdeSMOKE::MethodGear<denseOde> methodGear;
 			OdeSMOKE::MultiValueSolver<methodGear> ode_solver;
 			ode_solver.SetReactor(this);

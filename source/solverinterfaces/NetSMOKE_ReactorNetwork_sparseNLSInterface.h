@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	_   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,23 +15,23 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_REACTORNETWORK_DENSENLSINTERFACE_H
-#define NODUSSMOKE_REACTORNETWORK_DENSENLSINTERFACE_H
+#ifndef NETSMOKE_REACTORNETWORK_SPARSENLSINTERFACE_H
+#define NETSMOKE_REACTORNETWORK_SPARSENLSINTERFACE_H
 
 #include "ReactorNetwork.h"
 
 // NLS Solver
 #include "math/native-nls-solvers/NonLinearSystemSolver"
-#include "NodusSMOKE_ReactorNetwork_denseNLSinterface.h"
+#include "NetSMOKE_ReactorNetwork_sparseNLSinterface.h"
 
 
-class NodusSMOKE_ReactorNetwork_denseNLSinterface
+class NetSMOKE_ReactorNetwork_sparseNLSinterface
 {
 public:
 
-	NodusSMOKE_ReactorNetwork_denseNLSinterface() {};
+	NetSMOKE_ReactorNetwork_sparseNLSinterface() {};
 
-	void SetReactor(NodusSMOKE::ReactorNetwork* reactor)
+	void SetReactor(NetSMOKE::ReactorNetwork* reactor)
 	{
 		reactor_ = reactor;
 	};
@@ -63,9 +63,9 @@ protected:
 
 private:
 
-	NodusSMOKE::ReactorNetwork* reactor_;
+	NetSMOKE::ReactorNetwork* reactor_;
 	OpenSMOKE::OpenSMOKEVectorDouble  y_;
 	OpenSMOKE::OpenSMOKEVectorDouble dy_;
 };
 
-#endif /* NODUSSMOKE_REACTORNETWORK_DENSENLSINTERFACE_H */
+#endif /* NETSMOKE_REACTORNETWORK_sparseNLSINTERFACE_H */

@@ -1,5 +1,5 @@
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 	// CONSTRUCTOR
@@ -16,7 +16,7 @@ namespace NodusSMOKE
 	};
 
 	// SPLITTING OPERATION
-	int Units_Splitter::Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {
+	int Units_Splitter::Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {
 
 		for (int i = 1; i <= n_outlets_; ++i) {
 			//TONOTICE Can this be done in a more robust way?
@@ -35,13 +35,13 @@ namespace NodusSMOKE
 	};
 
 	/* Residual obtainer - RETURNS ERROR IF YOU CALL RESIDUALS FOR TRIVIAL UNITS */
-	int Units_Splitter::GetResiduals( OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	int Units_Splitter::GetResiduals( OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		OpenSMOKE::FatalErrorMessage(" Residuals have been requested for a trivial unit (SPLITTER). Please check your input file or contact Matteo Mensi at matteo.mensi@mail.polimi.it");
 		return 0;
 	};
 
 	/* Status printer - RETURNS ERROR */
-	void Units_Splitter::PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	void Units_Splitter::PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		OpenSMOKE::FatalErrorMessage("No print function implemented for trivial units yet");
 	};
 

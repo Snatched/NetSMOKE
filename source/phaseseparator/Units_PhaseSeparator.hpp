@@ -1,8 +1,8 @@
-namespace NodusSMOKE
+namespace NetSMOKE
 
 {
 	// CONSTRUCTOR
-	Units_PhaseSeparator::Units_PhaseSeparator(OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN* thermo,NodusSMOKE::UnitInfo unit_data) :
+	Units_PhaseSeparator::Units_PhaseSeparator(OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN* thermo,NetSMOKE::UnitInfo unit_data) :
 		thermodynamicsMapSOLID(*thermo),
 		Units(unit_data)
 	{
@@ -23,7 +23,7 @@ namespace NodusSMOKE
 	};
 
 	// PHASE SPLITTING OPERATION
-	int Units_PhaseSeparator::Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure)
+	int Units_PhaseSeparator::Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure)
 	{
 		// set local working variables
 		StreamIn = streams_data_structure[inlets_[0]];
@@ -62,7 +62,7 @@ namespace NodusSMOKE
 	};
 
 	/* Residual obtainer - Arguments are not used but needed for homogeneity */
-	int Units_PhaseSeparator::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	int Units_PhaseSeparator::GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 			
 		OpenSMOKE::FatalErrorMessage(" Residuals have been requested for a trivial unit (PHASESPLITTER). Please check your input file or contact Matteo Mensi at matteo.mensi@mail.polimi.it");
 
@@ -70,7 +70,7 @@ namespace NodusSMOKE
 	};
 
 	/* Printer - RETURNS ERROR */
-	void Units_PhaseSeparator::PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){
+	void Units_PhaseSeparator::PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure){
 		OpenSMOKE::FatalErrorMessage("Can't print phase splitters yet brah");
 	}
 

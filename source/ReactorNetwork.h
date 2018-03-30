@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	_   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,15 +15,15 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_ReactorNetwork_H
-#define NODUSSMOKE_ReactorNetwork_H
+#ifndef NETSMOKE_ReactorNetwork_H
+#define NETSMOKE_ReactorNetwork_H
 
 // Include the Reactor Network Framework
 #include "OpenSMOKEpp"  // OpenSMOKE definitions
 #include "vector"  // std vector
 #include "iostream" // input output stream
-#include "NodusSMOKE_Utilities"
-#include "NodusSMOKE_Units"
+#include "NetSMOKE_Utilities"
+#include "NetSMOKE_Units"
 
 
 
@@ -33,7 +33,7 @@
 	reactor network models.
 	*/
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 	class ReactorNetwork
@@ -54,8 +54,8 @@ namespace NodusSMOKE
 		*/
 		ReactorNetwork(OpenSMOKE::ThermodynamicsMap_CHEMKIN* thermodynamicsMap,
 			OpenSMOKE::KineticsMap_CHEMKIN* kineticsMap,
-			std::vector<NodusSMOKE::Units*>* DeviceMap,
-			std::vector<NodusSMOKE::StreamInfo>* Stream,
+			std::vector<NetSMOKE::Units*>* DeviceMap,
+			std::vector<NetSMOKE::StreamInfo>* Stream,
 			std::vector<Eigen::Triplet<int>>* InputTripletsVector);
 
 
@@ -101,7 +101,7 @@ namespace NodusSMOKE
 			/**
 			*@brief  Allows to extrapolate the results in terms of stream characteristics and solution vector to another scope, only at the final state
 			*/
-			void GetResults(OpenSMOKE::OpenSMOKEVectorDouble &solution, std::vector<NodusSMOKE::StreamInfo> &StreamFin);
+			void GetResults(OpenSMOKE::OpenSMOKEVectorDouble &solution, std::vector<NetSMOKE::StreamInfo> &StreamFin);
 
 			// Print Stream On Video - Prints stream i characteristics on video using std iostream
 			/**
@@ -239,10 +239,10 @@ namespace NodusSMOKE
 
 			// Device objects
 			// Device class objetcs are stored in a vector. Built reading UnitInfo data strcutures.
-			std::vector<NodusSMOKE::Units*> &Device;
+			std::vector<NetSMOKE::Units*> &Device;
 			
 			// Streams data strucutre
-			std::vector<NodusSMOKE::StreamInfo> &Stream;
+			std::vector<NetSMOKE::StreamInfo> &Stream;
 
 			// Relational Matrixes
 			Eigen::SparseMatrix<int> FlowMatrix; // stream/unit, compressed.
@@ -286,4 +286,4 @@ namespace NodusSMOKE
 
 #include "ReactorNetwork.hpp"
 
-#endif /* NODUSSMOKE_ReactorNetwork_H */
+#endif /* NETSMOKE_ReactorNetwork_H */

@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	_   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -21,12 +21,12 @@
 #include "string"
 #include "OpenSMOKEpp"
 
-#ifndef NODUSSMOKE_DATASTRUCTURES_H
-#define NODUSSMOKE_DATASTRUCTURES_H
+#ifndef NETSMOKE_DATASTRUCTURES_H
+#define NETSMOKE_DATASTRUCTURES_H
 
 /* The purpose of this header is to provide the common structure for data storage and transmission */
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 	// Structure for units
 	struct UnitInfo {
@@ -97,4 +97,4 @@ namespace NodusSMOKE
 
 	};
 }
-#endif /* NODUSSMOKE_DATASTRUCTURES_H */
+#endif /* NETSMOKE_DATASTRUCTURES_H */

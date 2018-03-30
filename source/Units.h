@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	_   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,10 +15,10 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_RNM_UNITS_H
-#define NODUSSMOKE_RNM_UNITS_H
+#ifndef NETSMOKE_RNM_UNITS_H
+#define NETSMOKE_RNM_UNITS_H
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 	/*
 	The purpose of this class is to provide a common framework to deal with
@@ -30,7 +30,7 @@ namespace NodusSMOKE
 	{
 	public:
 		/* Default contsructor */
-		Units(NodusSMOKE::UnitInfo unit_data)
+		Units(NetSMOKE::UnitInfo unit_data)
 		{
 			name_ = unit_data.name;
 			type_ = unit_data.type;
@@ -56,19 +56,19 @@ namespace NodusSMOKE
 		inline std::string GetEnergy() { return energy_; }						// Get energy type, isothermal or non isothermal
 
 		/* Virtual unit solver */
-		virtual int Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) { return 0; };
+		virtual int Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure) { return 0; };
 
 		/* Virtual residual obtainer - ONLY FOR REACTORS OR NON TRIVIAL UNITS, THESE WILL GO INTO THE CONSTRUCTED NLS/ODE */
-		virtual int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) { return 0; };
+		virtual int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure) { return 0; };
 
 		/* Virtual status printer- ONLY FOR REACTORS FOR NOW */
-		virtual void PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {};
+		virtual void PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {};
 
 		/* Virtual sequential solver */
-		virtual int NonIterativeSolve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure){ return 0; };
+		virtual int NonIterativeSolve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure){ return 0; };
 
 		/* RTD aware solver */
-		virtual int RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals,  const double t, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure) {return 0;};
+		virtual int RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals,  const double t, std::vector<NetSMOKE::StreamInfo> &streams_data_structure) {return 0;};
 
 	protected:
 
@@ -91,4 +91,4 @@ namespace NodusSMOKE
 
 }
 
-#endif /* NODUSSMOKE_RNM_UNITS_H */
+#endif /* NETSMOKE_RNM_UNITS_H */

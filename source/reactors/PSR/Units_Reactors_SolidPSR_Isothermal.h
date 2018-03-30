@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	 _   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,40 +15,40 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_UNITS_REACTORS_SOLIDPSR_ISOTHERMAL_H
-#define NODUSSMOKE_UNITS_REACTORS_SOLIDPSR_ISOTHERMAL_H
+#ifndef NETSMOKE_UNITS_REACTORS_SOLIDPSR_ISOTHERMAL_H
+#define NETSMOKE_UNITS_REACTORS_SOLIDPSR_ISOTHERMAL_H
 
 // Parent class
 #include "Units_Reactors_PSR.h"
 // Solid psr
 #include "solidreactors/solidpsr/SolidPerfectlyStirredReactor_Isothermal_ConstantPressure.h"
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 	class Units_Reactors_SolidPSR_Isothermal : public Units_Reactors_PSR {
 
 	public:
 		/* Default constructor */
-		Units_Reactors_SolidPSR_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapGasXML, OpenSMOKE::KineticsMap_CHEMKIN *kineticsMapGasXML, OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN *thermodynamicsMapSolidXML, OpenSMOKE::KineticsMap_Solid_CHEMKIN *kineticsMapSolidXML, double rho_solid, NodusSMOKE::UnitInfo unit_data);
+		Units_Reactors_SolidPSR_Isothermal(OpenSMOKE::ThermodynamicsMap_CHEMKIN *thermodynamicsMapGasXML, OpenSMOKE::KineticsMap_CHEMKIN *kineticsMapGasXML, OpenSMOKE::ThermodynamicsMap_Solid_CHEMKIN *thermodynamicsMapSolidXML, OpenSMOKE::KineticsMap_Solid_CHEMKIN *kineticsMapSolidXML, double rho_solid, NetSMOKE::UnitInfo unit_data);
 
 		/* Default destructor */
 		~Units_Reactors_SolidPSR_Isothermal();
 
 		/* Solve */
-		int Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		int Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
 		/* Solve in the sequential solver */
-		int NonIterativeSolve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		int NonIterativeSolve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
 		/* Get Residuals */
-		int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
 		/* Print reactor status */
-		void PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		void PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 		
 		/* RTD - huge fuckery involved */
-		int RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		int RTD(OpenSMOKE::OpenSMOKEVectorDouble &residuals, const double t, std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 		
 	protected:
 
@@ -97,4 +97,4 @@ namespace NodusSMOKE
 
 #include "Units_Reactors_SolidPSR_Isothermal.hpp"
 
-#endif /* NODUSSMOKE_UNITS_REACTORS_SOLIDPSR_ISOTHERMAL_H */
+#endif /* NETSMOKE_UNITS_REACTORS_SOLIDPSR_ISOTHERMAL_H */

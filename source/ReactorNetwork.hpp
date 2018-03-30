@@ -1,33 +1,18 @@
-/*-----------------------------------------------------------------------*\
-|																		  |
-|	 _   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
-|                                                                         |
-|   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
-|   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
-|   Department of Chemistry, Materials and Chemical Engineering           |
-|   Politecnico di Milano                                                 |
-|   P.zza Leonardo da Vinci 32, 20133 Milano                              |
-|                                                                         |
-\*-----------------------------------------------------------------------*/
+
 
 // Include OpenMP Header file
 #if defined(_OPENMP)
 #include "omp.h"
 #endif
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 
 	// CONSTRUCTOR
 	ReactorNetwork::ReactorNetwork(OpenSMOKE::ThermodynamicsMap_CHEMKIN* thermodynamicsMap,
 		OpenSMOKE::KineticsMap_CHEMKIN* kineticsMap,
-		std::vector<NodusSMOKE::Units*>* DeviceMap,
-		std::vector<NodusSMOKE::StreamInfo>* Stream,
+		std::vector<NetSMOKE::Units*>* DeviceMap,
+		std::vector<NetSMOKE::StreamInfo>* Stream,
 		std::vector<Eigen::Triplet<int>>* InputTripletsVector)
 		:
 		thermodynamicsMapXMLinternal(*thermodynamicsMap),
@@ -474,7 +459,7 @@ namespace NodusSMOKE
 	};
 
 	// GET RESULTS
-	void ReactorNetwork::GetResults(OpenSMOKE::OpenSMOKEVectorDouble &solution, std::vector<NodusSMOKE::StreamInfo> &StreamFin) // SERVIREBBE A FAR RIFARE I CALCOLI CON IL VETTORE SOLUZIONE PER OTTENERE I RISULTATI FINALI E SALVARLI, PROBABILMENTE SKIPPABILE
+	void ReactorNetwork::GetResults(OpenSMOKE::OpenSMOKEVectorDouble &solution, std::vector<NetSMOKE::StreamInfo> &StreamFin) // SERVIREBBE A FAR RIFARE I CALCOLI CON IL VETTORE SOLUZIONE PER OTTENERE I RISULTATI FINALI E SALVARLI, PROBABILMENTE SKIPPABILE
 	{
 
 		solution = yf;
@@ -639,4 +624,4 @@ namespace NodusSMOKE
 
 
 
-} /* END NAMESPACE NODUSSMOKE*/
+} /* END NAMESPACE NETSMOKE*/

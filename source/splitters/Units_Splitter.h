@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------*\
 |																		  |
-|	_   _           _            _____ __  __  ____  _  ________  		  |
-|	| \ | |         | |          / ____|  \/  |/ __ \| |/ /  ____| 		  |
-|	|  \| | ___   __| |_   _ ___| (___ | \  / | |  | | ' /| |__    		  |
-|	| . ` |/ _ \ / _` | | | / __|\___ \| |\/| | |  | |  < |  __|   		  |
-|	| |\  | (_) | (_| | |_| \__ \____) | |  | | |__| | . \| |____  		  |
-|	|_| \_|\___/ \__,_|\__,_|___/_____/|_|  |_|\____/|_|\_\______|		  |                                                              |
+|			 _   _      _    _____ __  __  ____  _  ________         	  |
+|			| \ | |    | |  / ____|  \/  |/ __ \| |/ /  ____|        	  |
+|			|  \| | ___| |_| (___ | \  / | |  | | ' /| |__   			  |
+|			| . ` |/ _ \ __|\___ \| |\/| | |  | |  < |  __|  		  	  |
+|			| |\  |  __/ |_ ____) | |  | | |__| | . \| |____ 		 	  |
+|			|_| \_|\___|\__|_____/|_|  |_|\____/|_|\_\______|		 	  |
 |                                                                         |
 |   Author: Matteo Mensi <matteo.mensi@mail.polimi.it>                    |
 |   CRECK Modeling Group <http://creckmodeling.chem.polimi.it>            |
@@ -15,14 +15,14 @@
 |                                                                         |
 \*-----------------------------------------------------------------------*/
 
-#ifndef NODUSSMOKE_RNM_UNITS_SPLITTER_H
-#define NODUSSMOKE_RNM_UNITS_SPLITTER_H
+#ifndef NETSMOKE_RNM_UNITS_SPLITTER_H
+#define NETSMOKE_RNM_UNITS_SPLITTER_H
 
 // A class to evaluate splitters as units inside an RNM
 
 #include "Units.h"
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
 	class Units_Splitter : public Units
 	{
@@ -32,13 +32,13 @@ namespace NodusSMOKE
 		Units_Splitter(UnitInfo unit_data);
 
 		// SPLITTING OPERATION
-		int Solve(std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		int Solve(std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
 		/* Residual obtainer - RETURNS ERROR IF YOU CALL RESIDUALS FOR TRIVIAL UNITS */
-		int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		int GetResiduals(OpenSMOKE::OpenSMOKEVectorDouble &residuals, std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 
 		/* Status printer - RETURNS ERROR */
-		void PrintStatus(boost::filesystem::path output_folder, std::vector<NodusSMOKE::StreamInfo> &streams_data_structure);
+		void PrintStatus(boost::filesystem::path output_folder, std::vector<NetSMOKE::StreamInfo> &streams_data_structure);
 		
 	private:
 		unsigned int n_outlets_;
@@ -49,4 +49,4 @@ namespace NodusSMOKE
 
 #include "splitters/Units_Splitter.hpp"
 
-#endif /* NODUSSMOKE_RNM_UNITS_SPLITTER_H*/
+#endif /* NETSMOKE_RNM_UNITS_SPLITTER_H*/

@@ -1,5 +1,5 @@
 
-namespace NodusSMOKE
+namespace NetSMOKE
 {
     
 
@@ -105,7 +105,7 @@ namespace NodusSMOKE
 
  };
 
-  void InputReader::ImportData(vector<NodusSMOKE::StreamInfo> &StreamStruct, vector<NodusSMOKE::UnitInfo> &UnitStruct, std::vector<int> &From, std::vector<int> &To, std::vector<double> &relative_split )
+  void InputReader::ImportData(vector<NetSMOKE::StreamInfo> &StreamStruct, vector<NetSMOKE::UnitInfo> &UnitStruct, std::vector<int> &From, std::vector<int> &To, std::vector<double> &relative_split )
   {
 
 
@@ -130,7 +130,7 @@ namespace NodusSMOKE
 
   }
 
-  void InputReader::ImportStreams(vector<NodusSMOKE::StreamInfo> &StreamStruct)
+  void InputReader::ImportStreams(vector<NetSMOKE::StreamInfo> &StreamStruct)
   {
         // Copy stream info
         /* It looks like shitty code but silvio just didn't use any kind of imposed order to save the data 
@@ -230,13 +230,13 @@ namespace NodusSMOKE
   }
 
 
-  void InputReader::ImportUnits(vector<NodusSMOKE::UnitInfo> &UnitStruct, vector<NodusSMOKE::StreamInfo> &StreamStruct)
+  void InputReader::ImportUnits(vector<NetSMOKE::UnitInfo> &UnitStruct, vector<NetSMOKE::StreamInfo> &StreamStruct)
   {
 
         // Import Reactors
         std::cout << " Reading reactors..." << std::endl;
         for (int i = 0; i<Reactor.size(); ++i){
-            NodusSMOKE::UnitInfo TempUnit;
+            NetSMOKE::UnitInfo TempUnit;
             TempUnit.tag = "Reactor";            
             TempUnit.name = Reactor[i].Name;
             TempUnit.phase = Reactor[i].Phase;
@@ -309,7 +309,7 @@ namespace NodusSMOKE
         // Import Mixers
         std::cout << " Reading mixers..." << std::endl;
         for (int i = 0; i<Mixer.size(); ++i){
-            NodusSMOKE::UnitInfo TempUnit;
+            NetSMOKE::UnitInfo TempUnit;
 			TempUnit.tag = "Mixer";
             TempUnit.name = Mixer[i].Name;
             TempUnit.energy = Mixer[i].Energy;
@@ -341,7 +341,7 @@ namespace NodusSMOKE
         //Import Splitters
         std::cout << " Reading splitters..." << std::endl;
         for (int i = 0; i<Splitter.size(); ++i){
-            NodusSMOKE::UnitInfo TempUnit;
+            NetSMOKE::UnitInfo TempUnit;
 			TempUnit.tag = "Splitter";
             TempUnit.name = Splitter[i].Name;
 			TempUnit.Nequations = 0;
@@ -360,7 +360,7 @@ namespace NodusSMOKE
         //Import Phase Splitters
         std::cout << " Reading phase splitters..." << std::endl;
         for (int i = 0; i<PhaseSplitter.size(); ++i){
-            NodusSMOKE::UnitInfo TempUnit;
+            NetSMOKE::UnitInfo TempUnit;
 			TempUnit.tag = "PhaseSplitter";
             TempUnit.name = PhaseSplitter[i].Name;
             TempUnit.inlets_names.push_back(PhaseSplitter[i].In_stream);
@@ -413,7 +413,7 @@ namespace NodusSMOKE
     }
 
 
-  void InputReader::ImportFlowVectors(std::vector<NodusSMOKE::StreamInfo>& StreamStruct, std::vector<NodusSMOKE::UnitInfo>& UnitStruct, std::vector<int> &MainFrom, std::vector<int> &MainTo, std::vector<double> &Main_relative_split)
+  void InputReader::ImportFlowVectors(std::vector<NetSMOKE::StreamInfo>& StreamStruct, std::vector<NetSMOKE::UnitInfo>& UnitStruct, std::vector<int> &MainFrom, std::vector<int> &MainTo, std::vector<double> &Main_relative_split)
   {
     std::cout << " Reading Flow Vectors..." << std::endl;
     
