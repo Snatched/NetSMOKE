@@ -123,7 +123,7 @@ namespace NetSMOKE
 		std::cout << std::endl;
 		std::cout << std::endl;
 		std::cout << "##############################################" << std::endl;
-		std::cout << " 			Series of reactor solution ..." << std::endl;
+		std::cout << " Series of reactor solution ..." << std::endl;
 		std::cout << "##############################################" << std::endl;
 		
 		while ( SolvingOrder.size() < Device.size() ) {
