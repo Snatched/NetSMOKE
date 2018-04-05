@@ -34,6 +34,8 @@ namespace NetSMOKE
 			Units(unit_data)
 				{
 					residence_time_ = unit_data.residence_time;
+					length_ = unit_data.length;
+					diameter_ = unit_data.diameter;
 				};
 
 		/* Solve */
@@ -52,7 +54,8 @@ namespace NetSMOKE
 	protected:
 		// Generic
 		double residence_time_;
-		double volume;
+		double length_;
+		double diameter_;
 
 		// Working structs
 		NetSMOKE::StreamInfo StreamIn;

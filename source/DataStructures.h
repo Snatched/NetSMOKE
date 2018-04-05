@@ -49,6 +49,9 @@ namespace NetSMOKE
 		std::string energy; // also used in mixers now PogChamp
 		std::string phase;
 		double residence_time;
+		double volume;
+		double length;
+		double diameter;
 		int Nequations;
 
 		// Used only in massflows distribution linear system for gas phase only case

@@ -40,6 +40,12 @@ public:
     string Energy;
     double Residence_time;
     string Residence_time_unit_of_measurement;
+    double Volume;
+    string Volume_unit_of_measurement;
+    double Diameter;
+    string Diameter_unit_of_measurement;
+    double Length;
+    string Length_unit_of_measurement;
     double Isothermal_temperature;
     string Isothermal_temperature_unit_of_measurement;
 

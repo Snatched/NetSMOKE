@@ -57,18 +57,32 @@ namespace NetSMOKE
 		}
 		StreamIn = streams_data_structure[inlets_[0]];
 
-		bool constant_pressure = true;
-		bool time_independent_variable = true;
 		double cross_section_over_perimeter;
-
-		if (UA_ > 0.){
-			double cross_section = sqrt(UA_);
-			double diameter = sqrt(cross_section*4/3.14);
-			double perimeter = 3.14*diameter;
-			cross_section_over_perimeter = cross_section/perimeter;
+		bool constant_pressure = true;
+		bool time_independent_variable;
+		double velocity;
+		if( residence_time_ > 0.){
+			time_independent_variable= true;
+			velocity = 1.;
+			if (UA_ > 0.){
+				double cross_section = sqrt(UA_);
+				double diameter = sqrt(cross_section*4/3.14);
+				double perimeter = 3.14*diameter;
+				cross_section_over_perimeter = cross_section/perimeter;
+			}
+			else {
+				cross_section_over_perimeter = 1.;
+			}
 		}
 		else {
-			cross_section_over_perimeter = 1.;
+			time_independent_variable = false;	
+			double area = 3.14*diameter_*diameter_/4.;
+			const double MW = thermodynamicsMap.MolecularWeight_From_MassFractions(StreamIn.omega_gas.GetHandle());
+			const double rho = pressure_ * MW / PhysicalConstants::R_J_kmol/StreamIn.temperature;
+			velocity = StreamIn.mass_flow_rate_gas/area/rho;
+			double perimeter = 3.14*diameter_;
+			cross_section_over_perimeter = area/perimeter;
+
 		}
 
 		// Construct PFR
@@ -76,13 +90,17 @@ namespace NetSMOKE
 													 *ode_parameters, *plugflow_options,
 													 *onTheFlyROPA, *on_the_fly_post_processing, *polimi_soot,
 													 time_independent_variable, constant_pressure,
-													 1., StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
+													 velocity, StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
 												   sqrt(UA_), cross_section_over_perimeter , StreamIn.temperature);
 
 
 		// Solve PSR
-		plugflow.Solve(residence_time_);
-		//std::cout << "solved the reactor number " << j << ". Moving onto the next..." << std::endl;
+		if( residence_time_ > 0.){
+			plugflow.Solve(residence_time_);
+		}
+		else {
+			plugflow.Solve(length_);		 
+		}
 
 		// Local data storing
 		plugflow.GetFinalStatus(StreamOut.temperature, StreamOut.pressure, StreamOut.omega_gas);
@@ -172,17 +190,31 @@ namespace NetSMOKE
 		plugflow_options->SetVerboseXMLFile(false);
 
 		bool constant_pressure = true;
-		bool time_independent_variable = true;
 		double cross_section_over_perimeter;
-
-		if (UA_ > 0.){
-			double cross_section = sqrt(UA_);
-			double diameter = sqrt(cross_section*4/3.14);
-			double perimeter = 3.14*diameter;
-			cross_section_over_perimeter = cross_section/perimeter;
+		bool time_independent_variable;
+		double velocity;
+		if( residence_time_ > 0.){
+			time_independent_variable= true;
+			velocity = 1.;
+			if (UA_ > 0.){
+				double cross_section = sqrt(UA_);
+				double diameter = sqrt(cross_section*4/3.14);
+				double perimeter = 3.14*diameter;
+				cross_section_over_perimeter = cross_section/perimeter;
+			}
+			else {
+				cross_section_over_perimeter = 1.;
+			}
 		}
 		else {
-			cross_section_over_perimeter = 1;
+			time_independent_variable = false;	
+			double area = 3.14*diameter_*diameter_/4.;
+			const double MW = thermodynamicsMap.MolecularWeight_From_MassFractions(StreamIn.omega_gas.GetHandle());
+			const double rho = pressure_ * MW / PhysicalConstants::R_J_kmol/StreamIn.temperature;
+			velocity = StreamIn.mass_flow_rate_gas/area/rho;
+			double perimeter = 3.14*diameter_;
+			cross_section_over_perimeter = area/perimeter;
+
 		}
 
 		StreamIn = streams_data_structure[inlets_[0]];
@@ -191,12 +223,17 @@ namespace NetSMOKE
 													 *ode_parameters, *plugflow_options,
 													 *onTheFlyROPA, *on_the_fly_post_processing, *polimi_soot,
 													 time_independent_variable, constant_pressure,
-													 1, StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
+													 velocity, StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
 												   sqrt(UA_), cross_section_over_perimeter , StreamIn.temperature);
 
 
 		// Solve PSR
-		plugflow.Solve(residence_time_);
+		if( residence_time_ > 0.){
+			plugflow.Solve(residence_time_);
+		}
+		else {
+			plugflow.Solve(length_);		 
+		}
 
 	};
 

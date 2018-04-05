@@ -34,6 +34,7 @@ namespace NetSMOKE
 			Units(unit_data)
 				{
 					residence_time_ = unit_data.residence_time;
+					volume_ = unit_data.volume;
 				};
 
 		/* Solve */
@@ -66,6 +67,7 @@ namespace NetSMOKE
 
 		// defined variables
 		double residence_time_;
+		double volume_;
 		double temperature_;
 
 		// densities

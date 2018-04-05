@@ -67,7 +67,7 @@ namespace NetSMOKE
 			temperature_, StreamIn.pressure, Omega_previous_gas, Omega_previous_solid,
 			StreamIn.temperature, StreamIn.pressure,  StreamIn.omega_gas,  StreamIn.omega_solid,
 			StreamIn.mass_flow_rate_gas,  StreamIn.mass_flow_rate_solid, rho_solid_,
-			residence_time_, -1.);
+			residence_time_, volume_);
 
 
 		int status = solidpsr.Solve(1.e8);
@@ -87,7 +87,7 @@ namespace NetSMOKE
 		// Local outlet stream data storage
 		solidpsr.GetFinalStatus(StreamOut.temperature, StreamOut.pressure, StreamOut.mass_flow_rate_gas, StreamOut.mass_flow_rate_solid, StreamOut.omega_gas, StreamOut.omega_solid);
 		// Recover stuff to calculate residuals
-		solidpsr.GetFinalResults( rhoGas, mass_gas, mass_solid, Rgas, Rgas_from_solid, Rsolid);
+		solidpsr.GetFinalResults( rhoGas, mass_gas, mass_solid, Rgas, Rgas_from_solid, Rsolid, residence_time_, volume_);
 		
 		// Import into "global" structure
 		streams_data_structure[outlets_[0]].phase = "Mix";
@@ -189,7 +189,7 @@ namespace NetSMOKE
 			temperature_, StreamIn.pressure, StreamIn.omega_gas, StreamIn.omega_solid,
 			StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas, StreamIn.omega_solid,
 			StreamIn.mass_flow_rate_gas, StreamIn.mass_flow_rate_solid,rho_solid_,
-			residence_time_, -1.);
+			residence_time_, volume_);
 			
 		// Solve PSR
 		solidpsr.Solve(1.e8);

@@ -263,21 +263,81 @@ namespace NetSMOKE
             TempUnit.outlets_names.push_back(Reactor[i].Out_stream);
 
             // Check residence time
-            if (Reactor[i].Residence_time_unit_of_measurement == "s")
-            TempUnit.residence_time = Reactor[i].Residence_time;
-            else if (Reactor[i].Residence_time_unit_of_measurement == "ms")
-            TempUnit.residence_time = Reactor[i].Residence_time/1000.;
-            else if (Reactor[i].Residence_time_unit_of_measurement == "min")
-            TempUnit.residence_time = Reactor[i].Residence_time*60.;
-            else if (Reactor[i].Residence_time_unit_of_measurement == "hr")
-            TempUnit.residence_time = Reactor[i].Residence_time*3600.;
-            else
-            {
-				std::cout << " the unit is " << Reactor[i].Residence_time_unit_of_measurement << std::endl;
-                std::cout << "ERROR: Reactor " << Reactor[i].Name << " residence time is absent, has wrong units or are not supported" << std::endl;
-				OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
-            }
+			if (Reactor[i].Type == "PSR"){
+				if (Reactor[i].Residence_time > 0.){
+					if (Reactor[i].Residence_time_unit_of_measurement == "s")
+					TempUnit.residence_time = Reactor[i].Residence_time;
+					else if (Reactor[i].Residence_time_unit_of_measurement == "ms")
+					TempUnit.residence_time = Reactor[i].Residence_time/1000.;
+					else if (Reactor[i].Residence_time_unit_of_measurement == "min")
+					TempUnit.residence_time = Reactor[i].Residence_time*60.;
+					else if (Reactor[i].Residence_time_unit_of_measurement == "hr")
+					TempUnit.residence_time = Reactor[i].Residence_time*3600.;
+					else
+					{
+						std::cout << " the unit is " << Reactor[i].Residence_time_unit_of_measurement << std::endl;
+						std::cout << "ERROR: Reactor " << Reactor[i].Name << " residence time is absent, has wrong units or are not supported" << std::endl;
+						OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+					}
+					TempUnit.volume = -1.;
+				}
+				else if (Reactor[i].Volume > 0.){
+					if (Reactor[i].Volume_unit_of_measurement == "m3")
+					TempUnit.volume = Reactor[i].Volume;
+					else if (Reactor[i].Volume_unit_of_measurement == "cm3")
+					TempUnit.volume = Reactor[i].Volume/1000000.;
+					else
+					{
+						std::cout << " the unit is " << Reactor[i].Volume_unit_of_measurement << std::endl;
+						std::cout << "ERROR: Reactor " << Reactor[i].Name << " volume is absent, has wrong units or are not supported" << std::endl;
+						OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+					}
+					TempUnit.residence_time = -1.;
+				}
+			}
+			else if (Reactor[i].Type == "PFR"){
+				if (Reactor[i].Residence_time > 0.){
+					if (Reactor[i].Residence_time_unit_of_measurement == "s")
+					TempUnit.residence_time = Reactor[i].Residence_time;
+					else if (Reactor[i].Residence_time_unit_of_measurement == "ms")
+					TempUnit.residence_time = Reactor[i].Residence_time/1000.;
+					else if (Reactor[i].Residence_time_unit_of_measurement == "min")
+					TempUnit.residence_time = Reactor[i].Residence_time*60.;
+					else if (Reactor[i].Residence_time_unit_of_measurement == "hr")
+					TempUnit.residence_time = Reactor[i].Residence_time*3600.;
+					else
+					{
+						std::cout << " the unit is " << Reactor[i].Residence_time_unit_of_measurement << std::endl;
+						std::cout << "ERROR: Reactor " << Reactor[i].Name << " residence time is absent, has wrong units or are not supported" << std::endl;
+						OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+					}
+				}
+				else if (Reactor[i].Length > 0.){
+					if (Reactor[i].Length_unit_of_measurement == "m")
+					TempUnit.length = Reactor[i].Length;
+					else if (Reactor[i].Length_unit_of_measurement == "cm")
+					TempUnit.length = Reactor[i].Length/100.;
+					else
+					{
+						std::cout << " the unit is " << Reactor[i].Length_unit_of_measurement << std::endl;
+						std::cout << "ERROR: Reactor " << Reactor[i].Name << " length is absent, has wrong units or are not supported" << std::endl;
+						OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+					}
 
+					if (Reactor[i].Diameter_unit_of_measurement == "m")
+					TempUnit.diameter = Reactor[i].Diameter;
+					else if (Reactor[i].Diameter_unit_of_measurement == "cm")
+					TempUnit.diameter = Reactor[i].Diameter/100.;
+					else
+					{
+						std::cout << " the unit is " << Reactor[i].Diameter_unit_of_measurement << std::endl;
+						std::cout << "ERROR: Reactor " << Reactor[i].Name << " diameter is absent, has wrong units or are not supported" << std::endl;
+						OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+					}
+
+					TempUnit.residence_time = -1;
+				}
+			}
             // Check T if Isothermal or UA if not isothermal
             if (Reactor[i].Energy == "HeatExchanger"){
                 if (Reactor[i].UA_unit_of_measurement == "W/K")
@@ -560,6 +620,9 @@ namespace NetSMOKE
 	  Reactor_keyword.push_back("UA");
 	  Reactor_keyword.push_back("Inlet_stream");
 	  Reactor_keyword.push_back("Outlet_stream");
+	  Reactor_keyword.push_back("Volume");
+	  Reactor_keyword.push_back("Diameter");
+	  Reactor_keyword.push_back("Length");
 
 
 	  vector <string> Stream_keyword;
@@ -912,6 +975,14 @@ namespace NetSMOKE
 										  cout << "ERROR at line " << line_number << "!Residence time of reactor " << Reactor[reactor_count].Name << " is negative!\n";
 										  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
 									  }
+
+									  Reactor[reactor_count].Volume = -1.;
+									  Reactor[reactor_count].Diameter = -1.;
+									  Reactor[reactor_count].Length = -1.;
+
+									  Reactor[reactor_count].Volume_unit_of_measurement = "m3";
+									  Reactor[reactor_count].Diameter_unit_of_measurement = "m";
+									  Reactor[reactor_count].Length_unit_of_measurement = "m";
 								  }
 
 								  else if (j == 3)//Phase
@@ -984,6 +1055,71 @@ namespace NetSMOKE
 
 								  }
 
+								  else if (j == 8)//Volume
+
+								  {
+									  double number;
+									  stringstream(Splitted_line.at(1)) >> number;
+									  Reactor[reactor_count].Volume = number;
+									  Reactor[reactor_count].Volume_unit_of_measurement = Splitted_line.at(2);
+
+									  if (Reactor[reactor_count].Volume < 0)
+									  {
+										  cout << "ERROR at line " << line_number << "!Volume of reactor " << Reactor[reactor_count].Name << " is negative!\n";
+										  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+									  }
+
+									  Reactor[reactor_count].Residence_time = -1.;
+									  Reactor[reactor_count].Diameter = -1.;
+									  Reactor[reactor_count].Length = -1.;
+
+									  Reactor[reactor_count].Residence_time_unit_of_measurement = "s";
+									  Reactor[reactor_count].Diameter_unit_of_measurement = "m";
+									  Reactor[reactor_count].Length_unit_of_measurement = "m";
+								  }
+
+								  else if (j == 9)//Diameter
+
+								  {
+									  double number;
+									  stringstream(Splitted_line.at(1)) >> number;
+									  Reactor[reactor_count].Diameter = number;
+									  Reactor[reactor_count].Diameter_unit_of_measurement = Splitted_line.at(2);
+
+									  if (Reactor[reactor_count].Diameter < 0)
+									  {
+										  cout << "ERROR at line " << line_number << "! Diameter of reactor " << Reactor[reactor_count].Name << " is negative!\n";
+										  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+									  }
+
+									  Reactor[reactor_count].Residence_time = -1.;
+									  Reactor[reactor_count].Volume = -1.;
+
+									  Reactor[reactor_count].Residence_time_unit_of_measurement = "s";
+									  Reactor[reactor_count].Volume_unit_of_measurement = "m3";
+								  }
+
+								  else if (j == 10)//Length
+
+								  {
+									  double number;
+									  stringstream(Splitted_line.at(1)) >> number;
+									  Reactor[reactor_count].Length = number;
+									  Reactor[reactor_count].Length_unit_of_measurement = Splitted_line.at(2);
+
+									  if (Reactor[reactor_count].Length < 0)
+									  {
+										  cout << "ERROR at line " << line_number << "!Length of reactor " << Reactor[reactor_count].Name << " is negative!\n";
+										  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+									  }
+
+									  Reactor[reactor_count].Residence_time = -1.;
+									  Reactor[reactor_count].Volume = -1.;
+
+									  Reactor[reactor_count].Residence_time_unit_of_measurement = "s";
+									  Reactor[reactor_count].Volume_unit_of_measurement = "m3";
+								  }
+
 
 
 							  }
@@ -1033,7 +1169,7 @@ namespace NetSMOKE
 					  if (R_keyword_controlling[j] == false)
 
 					  {
-						  if (j < 4 || j >= 6) // compulsory keywords
+						  if (j < 2 || j == 3 || j >=6 && j != 8 && j !=9 && j != 10) // compulsory keywords
 						  {
 							  cout << "ERROR at reactor " << Reactor[reactor_count].Name << "! " << Reactor_keyword[j] << " is missing!";
 							  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
@@ -1085,6 +1221,45 @@ namespace NetSMOKE
 							  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
 						  }
 
+					  }
+
+					 else if (j == 2 && R_keyword_controlling[j] == true)  // if tau is found but the reactor has volume, then the program finishes
+
+					  {
+						  if (Reactor[reactor_count].Volume > 0.)
+						  {
+							  cout << "ERROR!" << " Reactor " << Reactor[reactor_count].Name << " does not need a residence time!\n";
+							  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+						  }
+					  }
+
+					  else if (j == 2 && R_keyword_controlling[j] == true)  // if tau is found but the reactor has length, then the program finishes
+
+					  {
+						  if (Reactor[reactor_count].Length > 0.)
+						  {
+							  cout << "ERROR!" << " Reactor " << Reactor[reactor_count].Name << " does not need a residence time!\n";
+							  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+						  }
+					  }
+
+					  else if (j == 8 && R_keyword_controlling[j] == true)  // if volume but no PSR, then the program finishes
+
+					  {
+						  if (Reactor[reactor_count].Type != "PSR")
+						  {
+							  cout << "ERROR!" << " Reactor " << Reactor[reactor_count].Name << " can't be defined by volume!\n";
+							  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+						  }
+					  }
+					  else if (j == 10 && R_keyword_controlling[j] == true)  // if lenght but no diameter, then the program finishes
+
+					  {
+						  if (R_keyword_controlling[9] != true)
+						  {
+							  cout << "ERROR!" << " Reactor " << Reactor[reactor_count].Name << " needs both diameter and length!\n";
+							  OpenSMOKE::FatalErrorMessage("Error detected! Program will now exit!");
+						  }
 					  }
 
 

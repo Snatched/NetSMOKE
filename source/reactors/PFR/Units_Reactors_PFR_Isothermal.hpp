@@ -60,23 +60,40 @@ namespace NetSMOKE
 		}
 		StreamIn = streams_data_structure[inlets_[0]];
 		
-
 		bool constant_pressure = true;
-		bool time_independent_variable = true;
+		bool time_independent_variable;
+		double velocity;
+		if( residence_time_ > 0.){
+			time_independent_variable= true;
+			velocity = 1.;
+		}
+		else {
+			time_independent_variable = false;	
+			double area = 3.14*diameter_*diameter_/4.;
+			const double MW = thermodynamicsMap.MolecularWeight_From_MassFractions(StreamIn.omega_gas.GetHandle());
+			const double rho = pressure_ * MW / PhysicalConstants::R_J_kmol/temperature_;
+			velocity = StreamIn.mass_flow_rate_gas/area/rho;
+		}
 
 		// Construct PFR
 		OpenSMOKE::PlugFlowReactor_Isothermal plugflow(thermodynamicsMap, kineticsMap,
 													 *ode_parameters, *plugflow_options,
 													 *onTheFlyROPA, *on_the_fly_post_processing, *polimi_soot,
 													 time_independent_variable, constant_pressure,
-													 1., temperature_, StreamIn.pressure, StreamIn.omega_gas);
+													 velocity, temperature_, StreamIn.pressure, StreamIn.omega_gas);
 
 
 		// Solve PSR
-		plugflow.Solve(residence_time_);
+		if( residence_time_ > 0.){
+			plugflow.Solve(residence_time_);
+		}
+		else {
+			plugflow.Solve(length_);		 
+		}
 
 		// Local data storing
 		plugflow.GetFinalStatus(StreamOut.temperature, StreamOut.pressure, StreamOut.omega_gas);
+		
 		StreamOut.mass_flow_rate_gas = StreamIn.mass_flow_rate_gas;
 		StreamOut.mass_flow_rate_solid = 0.;
 		StreamOut.phase = "Gas";
@@ -165,7 +182,19 @@ namespace NetSMOKE
 		plugflow_options->SetVerboseXMLFile(false);
 
 		bool constant_pressure = true;
-		bool time_independent_variable = true;
+		bool time_independent_variable;
+		double velocity;
+		if( residence_time_ > 0.){
+			time_independent_variable= true;
+			velocity = 1.;
+		}
+		else {
+			time_independent_variable = false;	
+			double area = 3.14*diameter_*diameter_/4.;
+			const double MW = thermodynamicsMap.MolecularWeight_From_MassFractions(StreamIn.omega_gas.GetHandle());
+			const double rho = pressure_ * MW / PhysicalConstants::R_J_kmol/temperature_;
+			velocity = StreamIn.mass_flow_rate_gas/area/rho;
+		}
 
 		StreamIn = streams_data_structure[inlets_[0]];
 
@@ -174,11 +203,16 @@ namespace NetSMOKE
 													 *ode_parameters, *plugflow_options,
 													 *onTheFlyROPA, *on_the_fly_post_processing, *polimi_soot,
 													 time_independent_variable, constant_pressure,
-													 1., temperature_, StreamIn.pressure, StreamIn.omega_gas);
+													 velocity, temperature_, StreamIn.pressure, StreamIn.omega_gas);
 
 
 		// Solve PSR
-		plugflow.Solve(residence_time_);
+		if( residence_time_ > 0.){
+			plugflow.Solve(residence_time_);
+		}
+		else {
+			plugflow.Solve(length_);		 
+		}
 
 
 	};

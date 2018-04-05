@@ -101,15 +101,7 @@ namespace NetSMOKE
 		OpenSMOKE::OpenSMOKEVectorDouble omega_first(NS);
 		double first_guess_T;
 
-		std::vector<double> residence_time_vect;
-		for (unsigned int i = 0; i < Nunits; ++i) {
-			if (Unit[i].tag == "Reactor")
-				residence_time_vect.push_back(Unit[i].residence_time);
-		}
-
-		// I use the minimum residence time reduced
-		int target = std::distance(residence_time_vect.begin(), std::min_element(residence_time_vect.begin(), residence_time_vect.end()));
-		double tau_1st = 0.5*residence_time_vect[target];
+		double tau_1st = 0.5;
 
 		std::vector<NetSMOKE::StreamInfo> stream_inlet_vect;
 		NetSMOKE::StreamInfo StreamIn;
@@ -208,17 +200,7 @@ namespace NetSMOKE
 		double first_guess_flow_solid;
 		double first_guess_T;
 
-
-
-		std::vector<double> residence_time_vect;
-		for (unsigned int i = 0; i < Nunits; ++i) {
-			if (Unit[i].tag == "Reactor")
-				residence_time_vect.push_back(Unit[i].residence_time);
-		}
-
-		// I use the minimum residence time reduced
-		int target = std::distance(residence_time_vect.begin(), std::min_element(residence_time_vect.begin(), residence_time_vect.end()));
-		double tau_1st = 0.5*residence_time_vect[target];
+		double tau_1st = 0.5;
 
 		std::vector<StreamInfo> stream_inlet_vect;
 		StreamInfo StreamIn;

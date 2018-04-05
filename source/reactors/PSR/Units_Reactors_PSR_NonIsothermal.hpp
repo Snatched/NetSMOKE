@@ -60,7 +60,7 @@ namespace NetSMOKE{
 									*polimi_soot,
 									StreamIn.temperature, StreamIn.pressure, Omega_previous_gas,
 									StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
-									residence_time_, -1, StreamIn.mass_flow_rate_gas,
+									residence_time_, volume_, StreamIn.mass_flow_rate_gas,
 									sqrt(UA_),sqrt(UA_), StreamIn.temperature);
 
 
@@ -68,7 +68,7 @@ namespace NetSMOKE{
 		psr.Solve(1.e8);
 
 		// Local data storing
-		psr.GetFormationRates_HeatRelease_Density( Rgas, Qr, StreamOut.rho_gas);
+		psr.GetFormationRates_HeatRelease_Density( Rgas, Qr, StreamOut.rho_gas, residence_time_, volume_);
 		psr.GetFinalStatus(StreamOut.temperature, StreamOut.pressure, StreamOut.omega_gas);
 		
 		StreamOut.mass_flow_rate_gas = StreamIn.mass_flow_rate_gas;
@@ -172,7 +172,7 @@ namespace NetSMOKE{
 									*polimi_soot,
 									StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
 									StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
-									residence_time_, -1, StreamIn.mass_flow_rate_gas,
+									residence_time_, volume_, StreamIn.mass_flow_rate_gas,
 									UA_,
 									UA_, StreamIn.temperature);
 

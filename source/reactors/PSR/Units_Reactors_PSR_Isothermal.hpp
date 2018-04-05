@@ -67,13 +67,13 @@ namespace NetSMOKE
 			*ode_parameters, *psr_options, *onTheFlyROPA, *on_the_fly_post_processing, *polimi_soot,
 			temperature_, StreamIn.pressure, Omega_previous_gas,
 			StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
-			residence_time_, -1., StreamIn.mass_flow_rate_gas);
+			residence_time_, volume_, StreamIn.mass_flow_rate_gas);
 			
 		// Solve PSR
 		psr.Solve(1.e8);
 
 		// Data storing
-		psr.GetFinalResults(StreamOut.omega_gas, Rgas, StreamOut.rho_gas);
+		psr.GetFinalResults(StreamOut.omega_gas, Rgas, StreamOut.rho_gas, residence_time_, volume_);
 		psr.GetFinalStatus(StreamOut.temperature, StreamOut.pressure, StreamOut.omega_gas);
 		StreamOut.mass_flow_rate_gas = StreamIn.mass_flow_rate_gas;
 
@@ -143,7 +143,7 @@ namespace NetSMOKE
 			*ode_parameters, *psr_options, *onTheFlyROPA, *on_the_fly_post_processing, *polimi_soot,
 			temperature_, StreamIn.pressure, StreamIn.omega_gas,
 			StreamIn.temperature, StreamIn.pressure, StreamIn.omega_gas,
-			residence_time_, -1., StreamIn.mass_flow_rate_gas);
+			residence_time_, volume_, StreamIn.mass_flow_rate_gas);
 			
 		// Solve PSR
 		psr.Solve(1.e8);
