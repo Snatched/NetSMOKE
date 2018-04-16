@@ -170,7 +170,6 @@ namespace NetSMOKE
 		for (int j = 0; j < Nunits; ++j) { // FOR EACH UNIT
 			// if its a reactor
 			if (Device[j]->GetTag() == "Reactor") {
-				std::cout << Device[j]->GetName() << std::endl;
 				for (int i = 1; i <= NSgas; ++i) {
 					Stream[Device[j]->GetOutlets()[0]].omega_gas[i] = itervalues[++k]; // GAS SPECIES RESIDUAL
 				}
