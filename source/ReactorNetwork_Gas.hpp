@@ -262,7 +262,6 @@ namespace NetSMOKE
 				}
 				for (int i = 1; i <= NSgas; ++i) { 
 					dy[++k] = residuals[i]; // GAS SPECIES RESIDUAL
-					std::cout << dy[k] << std::endl;
 				}
 				dy[++k]=residuals[NSgas+2]; // T
 									
